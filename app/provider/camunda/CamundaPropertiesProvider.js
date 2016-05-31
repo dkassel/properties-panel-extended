@@ -133,7 +133,7 @@ function createGeneralTabGroups(element, bpmnFactory, elementRegistry, elementTe
         entries: []
     };
     serviceTaskDelegateProps(detailsGroup, element, bpmnFactory);
-    userTaskProps(detailsGroup, element);
+    userTaskProps(detailsGroup, element, bpmnFactory);
     scriptProps(detailsGroup, element, bpmnFactory);
     linkProps(detailsGroup, element);
     callActivityProps(detailsGroup, element, bpmnFactory);
