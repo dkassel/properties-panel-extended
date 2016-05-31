@@ -6,7 +6,7 @@ var $ = require('jquery'),
     BpmnModeler = require('bpmn-js/lib/Modeler');
 
 var propertiesPanelModule = require('bpmn-js-properties-panel'),
-    propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda'),
+    propertiesProviderModule = require('./provider/camunda'),
     camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda');
 
 var container = $('#js-drop-zone');
