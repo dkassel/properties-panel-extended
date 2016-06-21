@@ -1,12 +1,11 @@
 'use strict';
 
 var $ = require('jquery'),
-    is = require('bpmn-js/lib/util/ModelUtil').is,
     entryFactory = require('bpmn-js-properties-panel/lib/factory/EntryFactory');
 
 require('jquery-ui');
 
-module.exports = function (group, element, bpmnFactory) {
+module.exports = function (group) {
 
     group.entries.push(entryFactory.textField({
         id: 'priority',
@@ -16,6 +15,7 @@ module.exports = function (group, element, bpmnFactory) {
     }));
 
     var prioritySelektor = $("#camunda-priority");
+
     prioritySelektor.autocomplete({
         source:  ["low","normal","high"]
     });

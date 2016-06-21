@@ -1,14 +1,11 @@
 'use strict';
 
 var $ = require('jquery'),
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    entryFactory = require('bpmn-js-properties-panel/lib/factory/EntryFactory'),
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
+    entryFactory = require('bpmn-js-properties-panel/lib/factory/EntryFactory');
 
 require('jquery-ui');
 
-module.exports = function (group, element, bpmnFactory) {
+module.exports = function (group) {
 
     function split( val ) {
         return val.split( /;\s*/ );
@@ -26,8 +23,6 @@ module.exports = function (group, element, bpmnFactory) {
         label: 'Assignee',
         modelProperty: 'assignee'
     });
-
-    console.log(assigneeEntity);
 
     group.entries.push(assigneeEntity);
 
