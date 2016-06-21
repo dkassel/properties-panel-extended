@@ -38,8 +38,8 @@ var elementTemplateChooserProps = require('bpmn-js-properties-panel/lib/provider
     elementTemplateCustomProps = require('bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/CustomProps');
 
 // Input/Output
-var inputOutput = require('bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputProps'),
-    inputOutputParameter = require('bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputParameterProps');
+var inputOutput = require('./parts/InputOutputProps'),
+    inputOutputParameter = require('./parts/InputOutputParameterProps');
 
 // Connector
 var connectorDetails = require('bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorDetailProps'),
@@ -125,7 +125,10 @@ function createHskaTabGroups(element, bpmnFactory, elementRegistry, elementTempl
         label: 'Details',
         entries: []
     };
+
     simpleUserTaskProbs(detailsGroup, element);
+
+    serviceTaskDelegateProps(detailsGroup, element, bpmnFactory);
 
     var hskaGroup = {
         id: 'hska',
