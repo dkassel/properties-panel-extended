@@ -2,43 +2,43 @@
 
 var entryFactory = require('bpmn-js-properties-panel/lib/factory/EntryFactory'),
     getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper');
+    cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper'),
+    hskaFieldFactory = require('../factory/HskaFieldFactory');
 
+
+function createDynamicHskaFieldsForParameters(parameters, group) {
+  var name;
+
+  parameters.forEach(function(parameter) {
+    name = parameter.name || '';
+
+    if(name.indexOf(hskaFieldFactory.hskaPrefix) >= 0) {
+      group.entries.push(hskaFieldFactory.create(parameter));
+    }
+  });
+}
+
+function createDynamicHskaGroup(businessObj, group) {
+  var extensionElements = businessObj.get('bpmn:extensionElements'),
+      values;
+
+  if(extensionElements) {
+    values = extensionElements.get('bpmn:values') || [];
+    values.forEach(function(moddleElement) {
+      if(moddleElement.inputParameters) {
+        createDynamicHskaFieldsForParameters(moddleElement.inputParameters, group);
+      }
+      if(moddleElement.outputParameters) {
+        createDynamicHskaFieldsForParameters(moddleElement.outputParameters, group);
+      }
+    });
+  }
+}
 
 module.exports = function(group, element, bpmnFactory) {
 
-  // HsKA
-  var entry = entryFactory.textArea({
-    id: 'hska',
-    description: '',
-    label: 'HsKA',
-    modelProperty: 'hska'
-  });
+  var businessObject = getBusinessObject(element);
 
-  entry.set = function(element, values) {
-    var businessObject = getBusinessObject(element),
-        newObjectList = [];
+  //createDynamicHskaGroup(businessObject, group);
 
-    if (typeof values.hska !== 'undefined' && values.hska !== '') {
-      newObjectList.push(bpmnFactory.create('bpmn:HsKA', {
-        text: values.hska
-      }));
-    }
-
-    return cmdHelper.setList(element, businessObject, 'hska', newObjectList);
-  };
-
-  entry.get = function(element) {
-    var businessObject = getBusinessObject(element),
-        hskas = businessObject.get('hska'),
-        text = '';
-
-    if(Array.isArray(hskas)) {
-      text = hskas[0].text;
-    }
-
-    return { hska: text };
-  };
-
-  group.entries.push(entry);
 };

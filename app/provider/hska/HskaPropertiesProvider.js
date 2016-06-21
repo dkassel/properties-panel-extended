@@ -135,10 +135,37 @@ function createHskaTabGroups(element, bpmnFactory, elementRegistry, elementTempl
 
     hskaProps(hskaGroup, element, bpmnFactory);
 
+
+    var inputOutputGroup = {
+        id: 'input-output',
+        label: 'Parameters',
+        entries: []
+    };
+
+    var options = inputOutput(inputOutputGroup, element, bpmnFactory);
+
+    var inputOutputParameterGroup = {
+        id: 'input-output-parameter',
+        entries: [],
+        enabled: function(element, node) {
+            return options.getSelectedParameter(element, node);
+        },
+        label: function(element, node) {
+            var param = options.getSelectedParameter(element, node);
+            return getInputOutputParameterLabel(param);
+        }
+    };
+
+    inputOutputParameter(inputOutputParameterGroup, element, bpmnFactory, options);
+
+
+
     return [
         generalGroup,
         detailsGroup,
-        hskaGroup
+       // hskaGroup,
+        inputOutputGroup,
+        inputOutputParameterGroup
     ];
 
 }
