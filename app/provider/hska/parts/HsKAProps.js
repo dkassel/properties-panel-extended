@@ -39,6 +39,6 @@ module.exports = function(group, element, bpmnFactory) {
 
   var businessObject = getBusinessObject(element);
 
-  //createDynamicHskaGroup(businessObject, group);
+  createDynamicHskaGroup(businessObject, group);
 
 };
