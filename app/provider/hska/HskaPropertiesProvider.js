@@ -7,6 +7,9 @@ var PropertiesActivator = require('bpmn-js-properties-panel/lib/PropertiesActiva
 var asyncCapableHelper = require('bpmn-js-properties-panel/lib/helper/AsyncCapableHelper'),
     ImplementationTypeHelper = require('bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper');
 
+//hska properties
+var hskaProps = require('./parts/HskaProps');
+
 // bpmn properties
 var processProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/ProcessProps'),
     eventProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/EventProps'),
@@ -106,6 +109,23 @@ var getInputOutputParameterLabel = function(param) {
 
     return '';
 };
+
+function createHskaTabGroups(element, bpmnFactory, elementRegistry, elementTemplates) {
+
+
+    var hskaGroup = {
+        id: 'hska',
+        label: 'HsKA',
+        entries: []
+    };
+
+    hskaProps(hskaGroup, element, bpmnFactory);
+
+    return [
+        hskaGroup
+    ];
+
+}
 
 function createGeneralTabGroups(element, bpmnFactory, elementRegistry, elementTemplates) {
 
@@ -332,11 +352,19 @@ function createExtensionElementsGroups(element, bpmnFactory, elementRegistry) {
  * @param {ElementRegistry} elementRegistry
  * @param {ElementTemplates} elementTemplates
  */
-function CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, elementTemplates) {
+function HskaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, elementTemplates) {
 
     PropertiesActivator.call(this, eventBus);
 
     this.getTabs = function(element) {
+
+        var hskaTab = {
+            id: 'hska',
+            label: 'HsKA',
+            groups: createHskaTabGroups(
+                element, bpmnFactory,
+                elementRegistry, elementTemplates)
+        };
 
         var generalTab = {
             id: 'general',
@@ -387,6 +415,7 @@ function CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, eleme
         };
 
         return [
+            hskaTab,
             generalTab,
             variablesTab,
             connectorTab,
@@ -399,13 +428,13 @@ function CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, eleme
 
 }
 
-CamundaPropertiesProvider.$inject = [
+HskaPropertiesProvider.$inject = [
     'eventBus',
     'bpmnFactory',
     'elementRegistry',
     'elementTemplates'
 ];
 
-inherits(CamundaPropertiesProvider, PropertiesActivator);
+inherits(HskaPropertiesProvider, PropertiesActivator);
 
-module.exports = CamundaPropertiesProvider;
+module.exports = HskaPropertiesProvider;
