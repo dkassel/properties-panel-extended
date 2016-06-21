@@ -166,7 +166,7 @@ function createHskaTabGroups(element, bpmnFactory, elementRegistry, elementTempl
     return [
         generalGroup,
         detailsGroup,
-       // hskaGroup,
+        hskaGroup,
         inputOutputGroup,
         inputOutputParameterGroup
     ];
