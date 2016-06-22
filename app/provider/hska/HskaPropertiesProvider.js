@@ -20,6 +20,7 @@ var processProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/Pro
 
 // camunda properties
 var serviceTaskDelegateProps = require('bpmn-js-properties-panel/lib/provider/camunda/parts/ServiceTaskDelegateProps'),
+    customServiceTaskDelegateProbs = require('./parts/CustomServiceTaskDelegateProps'),
     userTaskProps = require('./parts/UserTaskProps'),
     simpleUserTaskProbs = require('./parts/SimpleUserTaskProps'),
     asynchronousContinuationProps = require('bpmn-js-properties-panel/lib/provider/camunda/parts/AsynchronousContinuationProps'),
@@ -127,8 +128,8 @@ function createHskaTabGroups(element, bpmnFactory, elementRegistry, elementTempl
     };
 
     simpleUserTaskProbs(detailsGroup, element);
-
-    serviceTaskDelegateProps(detailsGroup, element, bpmnFactory);
+    //serviceTaskDelegateProps(detailsGroup, element, bpmnFactory);
+    customServiceTaskDelegateProbs(detailsGroup, element, bpmnFactory);
 
     var hskaGroup = {
         id: 'hska',
@@ -136,7 +137,7 @@ function createHskaTabGroups(element, bpmnFactory, elementRegistry, elementTempl
         entries: []
     };
 
-    hskaProps(hskaGroup, element, bpmnFactory);
+    hskaProps(hskaGroup, element);
 
 
     var inputOutputGroup = {

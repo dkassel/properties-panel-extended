@@ -1,8 +1,6 @@
 'use strict';
 
-var entryFactory = require('bpmn-js-properties-panel/lib/factory/EntryFactory'),
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    cmdHelper = require('bpmn-js-properties-panel/lib/helper/CmdHelper'),
+var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
     hskaFieldFactory = require('../factory/HskaFieldFactory');
 
 
@@ -35,7 +33,7 @@ function createDynamicHskaGroup(businessObj, group) {
   }
 }
 
-module.exports = function(group, element, bpmnFactory) {
+module.exports = function(group, element) {
 
   var businessObject = getBusinessObject(element);
 

@@ -11,10 +11,10 @@ module.exports = {
             label = name.replace(this.hskaPrefix, '');
 
         return entryFactory.textField({
-            id: 'parameterName',
+            id: name,
             description: 'Dynamic Parameter',
             label: label,
-            modelProperty: 'name',
+            modelProperty: name,
         });
     }
 }

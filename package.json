@@ -40,6 +40,7 @@
     "diagram-js": "^0.15.0",
     "inherits": "^2.0.1",
     "jquery": "^2.1.1",
+    "min-dom": "^0.2.0",
     "jquery-ui": "^1.10.5",
     "lodash": "^3.0.0"
   }
